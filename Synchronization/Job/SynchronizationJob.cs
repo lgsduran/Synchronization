@@ -5,8 +5,19 @@ using Synchronization.Settings;
 
 namespace Synchronization.Job
 {
+    /// <summary>
+    /// Class <c>SynchronizationJob</c> gathers the cycle of operation
+    /// that has the job to be performed.
+    /// </summary>
     public class SynchronizationJob : IJob
     {
+        /// <summary>
+        /// Method <c>Execute</c> gathers the cycle of operation
+        /// that is triggered by the job.
+        /// </summary>
+        /// <returns>
+        /// The successfully completed task.
+        /// </returns>
         public Task Execute(IJobExecutionContext context)
         {
             var _log = new ConsoleLog("SynchronizationJob");

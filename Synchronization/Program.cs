@@ -47,10 +47,14 @@ class Program
         Console.ReadKey();
     }
 
+    /// <summary>
+    /// Method <c>GetSettings</c> loads 
+    /// when the source folder does not have the same file(s) as in
+    /// destination folder.
+    /// </summary>
     private static void GetSettings(string settingsPath)
     {
         var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(settingsPath, optional: false);
 
         try
