@@ -49,7 +49,7 @@ string _settingsPath = @"/foo/Synchronization/Synchronization/Settings/appsettin
 
 - The file **SynchronizationLog.txt** has the operation logs.
 
-**Additional Info**
+##Additional Info
 - The task was developed by using the folders srcFolder and destFolder added to the project's root path.
 
 
