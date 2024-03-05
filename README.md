@@ -47,3 +47,5 @@ string _settingsPath = @"/foo/Synchronization/Synchronization/Settings/appsettin
   }
 }
 ```
+
+- The file **SynchronizationLog.txt** has the operation logs. 
