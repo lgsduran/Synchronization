@@ -21,8 +21,7 @@
 │   ├── Synchronization.csproj
 │   ├── Utils
 │   │   ├── CheckSumUtils.cs
-│   │   └── WriteLogFileUtils.cs
-│   ├── destFolder
+│   │   └── WriteLogFileUtils.cs│  
 └── Synchronization.sln
 ```
 ![](https://img.shields.io/badge/build-success-brightgreen.svg)
