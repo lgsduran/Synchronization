@@ -1,3 +1,7 @@
+# Synchronization
+
+### Task Structure
+```sh
 ├── Synchronization
 │   ├── Exception
 │   │   └── FilePathException.cs
@@ -19,5 +23,27 @@
 │   │   ├── CheckSumUtils.cs
 │   │   └── WriteLogFileUtils.cs
 │   ├── destFolder
-│   └── srcFolder
 └── Synchronization.sln
+```
+![](https://img.shields.io/badge/build-success-brightgreen.svg)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+## Instructions
+
+The solution relies on mainly four paths to compile succesfully. Therefore, two files which must be updated according to the source and target folders as well as the settings as below.
+
+- The file **program.cs** stores the kick off path value which is expected to reflect the current folder path: 
+```csharp
+string _settingsPath = @"/foo/Synchronization/Synchronization/Settings/appsettings.json";
+```
+
+- On the other hand, the file **ppsettings.json** stores the paths related to the two synchronized folders as well as the log target file that must eflect the current folder path: 
+```json
+{
+  "Folders": {
+    "SourceFolder": "/foo/Synchronization/Synchronization/srcFolder/",
+    "DestinationFolder": "foo/Synchronization/Synchronization/destFolder/",
+    "LogFilePath": "foo/Synchronization/Synchronization/Logs/"
+  }
+}
+```
