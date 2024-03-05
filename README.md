@@ -37,7 +37,7 @@ The solution relies on mainly four paths to compile succesfully. Therefore, ther
 string _settingsPath = @"/foo/Synchronization/Synchronization/Settings/appsettings.json";
 ```
 
-- On the other hand, the file **appsettings.json** stores the paths related to the two synchronized folders as well as the log target file that must eflect the current folder path: 
+- On the other hand, the file **appsettings.json** stores the paths related to the two synchronized folders as well as the log target file that must reflect the current folder path: 
 ```json
 {
   "Folders": {
