@@ -16,3 +16,33 @@ Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/de
 File name(s): EmptyTextFile.txt
 TimeStamp: 03/04/2024 19:38.13
 
+Action: copy
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
+File name(s): EmptyTextFile.txt,EmptyTextFile (copiar).txt,EmptyTextFile (copiar) (outra cópia).txt
+TimeStamp: 03/05/2024 11:33.55
+
+Action: update
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
+File name(s): EmptyTextFile.txt,EmptyTextFile (copiar) (outra cópia).txt
+TimeStamp: 03/05/2024 11:34.40
+
+Action: removal
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
+File name(s): EmptyTextFile (copiar).txt
+TimeStamp: 03/05/2024 11:34.40
+
+Action: removal
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
+File name(s): EmptyTextFile.txt
+TimeStamp: 03/05/2024 11:36.05
+
+Action: removal
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
+File name(s): EmptyTextFile (copiar) (outra cópia).txt
+TimeStamp: 03/05/2024 11:36.20
+

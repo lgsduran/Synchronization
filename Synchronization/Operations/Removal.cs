@@ -34,15 +34,12 @@ namespace Synchronization.Operations
             foreach (var descFileName in UnkownFileInDestFolder)
             {
                 if (File.Exists(Path.Combine(destinationFolder, Path.GetFileName(descFileName))))
-                {
-                    File.Delete(Path.Combine(destinationFolder, Path.GetFileName(descFileName)));
-                }
+                    File.Delete(Path.Combine(destinationFolder, Path.GetFileName(descFileName)));                
             }
             var _logFile = new WriteLogFileUtils();
             _logFile.WriteFile("removal", string.Join(",", UnkownFileInDestFolder), sourceFolder, destinationFolder);
             _log.info(string.Format("File(s) {0} removed succesfully.", string.Join(",", UnkownFileInDestFolder)));
         }
-
     }
 }
 

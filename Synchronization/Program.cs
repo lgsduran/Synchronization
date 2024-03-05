@@ -25,7 +25,7 @@ class Program
             .WithIdentity("SynchronizationJob", "SynchronizationGroup")
             .Build();
 
-        // Trigger the job to run now, and then repeat every 15 seconds
+        // Trigger the job to run now, and then repeat according to the seconds
         var trigger = TriggerBuilder.Create()
             .WithIdentity("SynchronizationTrigger", "SynchronizationGroup")
             .StartNow()
@@ -48,9 +48,7 @@ class Program
     }
 
     /// <summary>
-    /// Method <c>GetSettings</c> loads 
-    /// when the source folder does not have the same file(s) as in
-    /// destination folder.
+    /// Method <c>GetSettings</c> loads application configuration properties.
     /// </summary>
     private static void GetSettings(string settingsPath)
     {
