@@ -54,4 +54,4 @@ string _settingsPath = @"/foo/Synchronization/Synchronization/Settings/appsettin
 
 ## Additional Info
 - The task was developed by using the folders srcFolder and destFolder added to the project's root path.
-- It is mandatory to keep the files closed before any job execution.
+- It is highly recommended keeping the files closed before any job execution.
