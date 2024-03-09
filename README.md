@@ -4,27 +4,27 @@
 ```sh
 ├── README.md
 ├── Synchronization
-  ├── Exception
-    └── FilePathException.cs
-  ├── Extensions
-    └── OperationExtensions.cs
-  ├── Job
-    └── SynchronizationJob.cs
-  ├── Logs
-    ├── ConsoleLog.cs
-    └── SynchronizationLog.txt
-  ├── Operations
-    ├── Copy.cs
-    ├── Delete.cs
-    └── Update.cs
-  ├── Program.cs
-  ├── Settings
-    ├── FolderOptions.cs
-    └── appsettings.json
-  ├── Synchronization.csproj
-  ├── Utils
-    ├── CheckSumUtils.cs
-    └── WriteLogFileUtils.cs  
+│   ├── Exception
+│   │   └── FilePathException.cs
+│   ├── Extensions
+│   │   └── OperationExtensions.cs
+│   ├── Job
+│   │   └── SynchronizationJob.cs
+│   ├── Logs
+│   │   ├── ConsoleLog.cs
+│   │   └── SynchronizationLog.txt
+│   ├── Operations
+│   │   ├── Copy.cs
+│   │   ├── Delete.cs
+│   │   └── Update.cs
+│   ├── Program.cs
+│   ├── Settings
+│   │   ├── FolderOptions.cs
+│   │   └── appsettings.json
+│   ├── Synchronization.csproj
+│   ├── Utils
+│   │   ├── CheckSumUtils.cs
+│   │   └── WriteLogFileUtils.cs│   
 └── Synchronization.sln
 ```
 ![](https://img.shields.io/badge/build-success-brightgreen.svg)
