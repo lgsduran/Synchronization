@@ -34,8 +34,9 @@ namespace Synchronization.Job
             var _copy = new Copy();
             _copy.copyFiles(sourceFolder, destinationFolder);
 
-            var _remove = new Removal();
-            _remove.removeFiles(sourceFolder, destinationFolder);
+            var _delete = new Delete();
+            _delete.deleteFiles(sourceFolder, destinationFolder);
+
             _log.info("Executing job.");
             return Task.CompletedTask;
         }

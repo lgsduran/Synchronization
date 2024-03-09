@@ -21,6 +21,9 @@
     <None Remove="Settings\" />
     <None Remove="Utils\" />
     <None Remove="srcFolder\" />
+    <None Remove="Extensions\" />
+    <None Remove="destFolder\" />
+    <None Remove="srcFolder\Nova\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exception\" />
@@ -30,5 +33,23 @@
     <Folder Include="Settings\" />
     <Folder Include="Utils\" />
     <Folder Include="srcFolder\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="srcFolder\Nova\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
+    <Folder Include="destFolder\" />
   </ItemGroup>
 </Project>

@@ -1,48 +1,84 @@
+Action: Directory Creation
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova Pasta
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova Pasta
+File name(s): 
+TimeStamp: 03/09/2024 14:25.28
+
+Action: Directory Creation
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova Pasta
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova Pasta
+File name(s): 
+TimeStamp: 03/09/2024 14:30.24
+
+Action: Directory Creation
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova
+File name(s): 
+TimeStamp: 03/09/2024 14:32.33
+
 Action: copy
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt
-TimeStamp: 03/04/2024 19:37.13
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:38.58
 
-Action: update
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt
-TimeStamp: 03/04/2024 19:37.43
-
-Action: removal
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt
-TimeStamp: 03/04/2024 19:38.13
+Action: Delete
+Source forder: 
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:39.00
 
 Action: copy
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt,EmptyTextFile (copiar).txt,EmptyTextFile (copiar) (outra cópia).txt
-TimeStamp: 03/05/2024 11:33.55
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:39.44
 
-Action: update
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt,EmptyTextFile (copiar) (outra cópia).txt
-TimeStamp: 03/05/2024 11:34.40
+Action: Delete
+Source forder: 
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:39.55
 
-Action: removal
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile (copiar).txt
-TimeStamp: 03/05/2024 11:34.40
+Action: copy
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:40.21
 
-Action: removal
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile.txt
-TimeStamp: 03/05/2024 11:36.05
+Action: Delete
+Source forder: 
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 14:42.16
 
-Action: removal
-Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/
-Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/
-File name(s): EmptyTextFile (copiar) (outra cópia).txt
-TimeStamp: 03/05/2024 11:36.20
+Action: copy
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/TextFile.txt
+TimeStamp: 03/09/2024 16:37.18
+
+Action: Directory Creation
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/Nova
+File name(s): 
+TimeStamp: 03/09/2024 16:37.48
+
+Action: copy
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/Nova/TextFile.txt
+TimeStamp: 03/09/2024 16:37.48
+
+Action: Update
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/Nova/TextFile.txt
+TimeStamp: 03/09/2024 16:43.37
+
+Action: Update
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova/Nova/TextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/Nova/TextFile.txt
+TimeStamp: 03/09/2024 16:44.30
 
