@@ -20,15 +20,13 @@ namespace Synchronization.Utils
             string fileName = "SynchronizationLog.txt";
             try
             {
-                using (var sw = new StreamWriter(FolderOptions.LogFilePath + fileName, true))
-                {
-                    sw.WriteLine("Action: {0}", action);
-                    sw.WriteLine("Source forder: {0}", srcFolder);
-                    sw.WriteLine("Destination forder: {0}", destFolder);
-                    sw.WriteLine("File name(s): {0}", fileNames);
-                    sw.WriteLine("TimeStamp: {0}", DateTime.Now.ToString("MM/dd/yyyy HH:mm.ss"));
-                    sw.WriteLine("");
-                }
+                using var sw = new StreamWriter(FolderOptions.LogFilePath + fileName, true);                
+                sw.WriteLine("Action: {0}", action);
+                sw.WriteLine("Source forder: {0}", srcFolder);
+                sw.WriteLine("Destination forder: {0}", destFolder);
+                sw.WriteLine("File name(s): {0}", fileNames);
+                sw.WriteLine("TimeStamp: {0}", DateTime.Now.ToString("MM/dd/yyyy HH:mm.ss"));
+                sw.WriteLine("");                
             }
             catch (Exception e)
             {
