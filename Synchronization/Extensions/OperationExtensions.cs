@@ -32,7 +32,7 @@ namespace Synchronization.Extensions
                 Console.WriteLine(newCombinePath);
                 Directory.CreateDirectory(newCombinePath);
                 _logFile.WriteFile("Directory Creation", "", sourcePath, newCombinePath);
-                _log.info(string.Format("Directory(s) {0} created succesfully.", tempPath));
+                _log.Info(string.Format("Directory(s) {0} created succesfully.", tempPath));
             }    
 
             foreach (var sourcePath in Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories))
@@ -48,7 +48,7 @@ namespace Synchronization.Extensions
                             _checkSum.SHA256CheckSum(sourceFile);
                             new FileInfo(sourceFile).CopyTo(newPath, true);
                             _logFile.WriteFile("copy", sourceFile, sourcePath, newPath);
-                            _log.info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
+                            _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
 
                         }
                     }
@@ -66,7 +66,7 @@ namespace Synchronization.Extensions
                     new FileInfo(Path.Combine(source.FullName, Path.GetFileName(file.Name)))
                         .CopyTo(Path.Combine(target.FullName, Path.GetFileName(file.Name)), true);
                     _logFile.WriteFile("copy", file.Name, source.FullName, target.FullName);
-                    _log.info(string.Format("File(s) {0} copied succesfully.", file.Name));
+                    _log.Info(string.Format("File(s) {0} copied succesfully.", file.Name));
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Synchronization.Extensions
                         _checkSum.SHA256CheckSum(sourceFile);
                         File.Copy(sourceFile, newPath, true);
                         _logFile.WriteFile("Update", sourceFile, sourcePath, newPath);
-                        _log.info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                        _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace Synchronization.Extensions
                             _checkSum.SHA256CheckSum(dest.ToString());
                             src.CopyTo(dest.ToString(), true);
                             _logFile.WriteFile("Update", src.Name, source.FullName, target.FullName);
-                            _log.info(string.Format("File(s) {0} updated succesfully.", src.Name));
+                            _log.Info(string.Format("File(s) {0} updated succesfully.", src.Name));
                         }
                     }
                 }
@@ -148,7 +148,7 @@ namespace Synchronization.Extensions
                     if (Directory.Exists(targetPath))
                     {
                         Directory.Delete(targetPath, true);                       
-                        _log.info(string.Format("Deleted: {0}", newPath));
+                        _log.Info(string.Format("Deleted: {0}", newPath));
                     }                        
                 }
             }
@@ -165,7 +165,7 @@ namespace Synchronization.Extensions
                         {
                             File.Delete(targetFile);
                             _logFile.WriteFile("Delete", targetFile, "", newPath);
-                            _log.info(string.Format("File(s) {0} deleted succesfully.", targetFile));
+                            _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
                         }                            
                     }
                 }
@@ -182,7 +182,7 @@ namespace Synchronization.Extensions
                     {
                         File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
                         _logFile.WriteFile("Delete", file.Name, "", target.FullName);
-                        _log.info(string.Format("File(s) {0} deleted succesfully.", file.Name));
+                        _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
                     }                        
                 }
             }

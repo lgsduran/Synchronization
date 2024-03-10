@@ -29,13 +29,13 @@ namespace Synchronization.Job
                 throw new FilePathException("No empty path is allowed!");
 
             var _update = new Update();
-            _update.updateFiles(sourceFolder, destinationFolder);
+            _update.UpdateFiles(sourceFolder, destinationFolder);
 
             var _copy = new Copy();
-            _copy.copyFiles(sourceFolder, destinationFolder);
+            _copy.CopyFiles(sourceFolder, destinationFolder);
 
             var _delete = new Delete();
-            _delete.deleteFiles(sourceFolder, destinationFolder);
+            _delete.DeleteFiles(sourceFolder, destinationFolder);
 
             _log.Info("Executing job.");
             return Task.CompletedTask;

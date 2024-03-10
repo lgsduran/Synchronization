@@ -130,3 +130,15 @@ Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/de
 File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova/Nova/Nova/TextFile.txt
 TimeStamp: 03/09/2024 17:16.20
 
+Action: Directory Creation
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova Pasta/Nova Pasta
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova Pasta/Nova Pasta
+File name(s): 
+TimeStamp: 03/09/2024 21:19.51
+
+Action: copy
+Source forder: /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova Pasta
+Destination forder: /Users/luizduran/Projects/Synchronization/Synchronization/destFolder/Nova Pasta/Nova Pasta/EmptyTextFile.txt
+File name(s): /Users/luizduran/Projects/Synchronization/Synchronization/srcFolder/Nova Pasta/Nova Pasta/EmptyTextFile.txt
+TimeStamp: 03/09/2024 21:19.51
+
