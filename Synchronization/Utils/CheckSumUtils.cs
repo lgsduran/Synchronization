@@ -21,7 +21,7 @@ namespace Synchronization.Utils
             try
             {
                 using var sha256 = SHA256.Create();
-                using (var fileStream = File.OpenRead(filePath))
+                using var fileStream = File.OpenRead(filePath);
                     bitConverter = BitConverter.ToString(sha256.ComputeHash(fileStream)).Replace("-", "");
             }
             catch (Exception e)
