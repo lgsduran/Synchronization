@@ -12,7 +12,7 @@ namespace Synchronization.Operations
         /// when the source folder does not have the same file(s) as in
         /// destination folder.
         /// </summary>
-        public void deleteFiles(string sourceFolder, string destinationFolder)
+        public void DeleteFiles(string sourceFolder, string destinationFolder)
         {
             var sourceDir = new DirectoryInfo(sourceFolder);
             var destDir = new DirectoryInfo(destinationFolder);

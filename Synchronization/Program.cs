@@ -61,11 +61,11 @@ class Program
             FolderOptions.SourceFolder = config["Folders:SourceFolder"];
             FolderOptions.DestinationFolder = config["Folders:DestinationFolder"];
             FolderOptions.LogFilePath = config["Folders:LogFilePath"];
-            _log.info("appsettings file is loaded properly.");
+            _log.Info("appsettings file is loaded properly.");
         }
         catch (Exception e)
         {
-            _log.error($"Settings failed: {e.Message}");
+            _log.Error($"Settings failed: {e.Message}");
         }
     }
 }

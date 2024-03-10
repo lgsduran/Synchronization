@@ -37,7 +37,7 @@ namespace Synchronization.Job
             var _delete = new Delete();
             _delete.deleteFiles(sourceFolder, destinationFolder);
 
-            _log.info("Executing job.");
+            _log.Info("Executing job.");
             return Task.CompletedTask;
         }
     }

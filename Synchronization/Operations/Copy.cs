@@ -11,7 +11,7 @@ namespace Synchronization.Operations
         /// Method <c>copyFiles</c> copies file(s) from source folder to destination folder
         /// which will be tagged with a Checksum.
         /// </summary>
-        public void copyFiles(string sourceFolder, string destinationFolder)
+        public void CopyFiles(string sourceFolder, string destinationFolder)
         {
             var sourceDir = new DirectoryInfo(sourceFolder);
             var destDir = new DirectoryInfo(destinationFolder);           

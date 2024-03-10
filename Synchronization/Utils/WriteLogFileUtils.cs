@@ -30,7 +30,7 @@ namespace Synchronization.Utils
             }
             catch (Exception e)
             {
-                _log.error($"Log file failed: {e.Message}");
+                _log.Error($"Log file failed: {e.Message}");
             }
         }
     }

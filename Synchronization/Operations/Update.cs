@@ -12,7 +12,7 @@ namespace Synchronization.Operations
         /// when the content has been modified in source folder. It compares the 
         /// SHA256 from each file to copy the ones whose algorithm might be different.
         /// </summary>
-        public void updateFiles(string sourceFolder, string destinationFolder)
+        public void UpdateFiles(string sourceFolder, string destinationFolder)
         {
             var sourceDir = new DirectoryInfo(sourceFolder);
             var destDir = new DirectoryInfo(destinationFolder);

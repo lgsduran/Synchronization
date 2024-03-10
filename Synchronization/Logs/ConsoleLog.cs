@@ -17,7 +17,7 @@ namespace Synchronization.Logs
         /// <summary>
         /// Method <c>info</c> formats and writes an informational log message.
         /// </summary>
-        public void info(string message)
+        public void Info(string message)
         {
             ConsoleLogger().LogInformation(message);
         }
@@ -25,7 +25,7 @@ namespace Synchronization.Logs
         /// <summary>
         /// Method <c>error</c> formats and writes an error log message.
         /// </summary>
-        public void error(string message)
+        public void Error(string message)
         {
             ConsoleLogger().LogError(message);
         }
