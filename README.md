@@ -32,7 +32,7 @@
 
 ## Instructions
 
-The solution relies on mainly four paths to compile succesfully. Therefore, there are two files which must be updated according to the source and target folders as well as the settings as below.
+This solution not only relies on four paths to be compiled succesfully but it's responsible for synchronizing two folders. Therefore, there are two files which must be updated according to the source and target folders as well as the settings as below.
 
 - The file **program.cs** stores the kick off path value which is expected to reflect the current folder path: 
 ```csharp
