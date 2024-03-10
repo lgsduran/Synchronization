@@ -17,9 +17,7 @@ namespace Synchronization.Extensions
             if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
                 throw new DirectoryNotFoundException("Directory not found!");
 
-            var _checkSum = new CheckSumUtils();
             var _log = new ConsoleLog("Copy");
-            var _logFile = new WriteLogFileUtils();
 
             foreach (var sourcePath in Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories))
             {
