@@ -7,11 +7,11 @@ namespace Synchronization.Logs
     /// </summary>
     public class ConsoleLog
     {
-        private string className;
+        private string _className;
 
         public ConsoleLog(string className)
         {
-            this.className = className;
+            _className = className;
         }
 
         /// <summary>
@@ -31,23 +31,21 @@ namespace Synchronization.Logs
         }
 
         /// <summary>
-        /// Method <c>ConsoleLogger</c> is responsible to instantiate the ILogger
+        /// Method <c>ConsoleLogger</c> is responsible for instantiating the ILogger
         /// </summary>
         /// <returns>
         /// a type to perform logging.
         /// </returns>
         private ILogger ConsoleLogger()
         {
-            using ILoggerFactory loggerFactory =
-            LoggerFactory.Create(builder =>
-            builder.AddSimpleConsole(options =>
-            {
-                options.IncludeScopes = true;
-                options.SingleLine = true;
-                options.TimestampFormat = "MM/dd/yyyy HH:mm:ss ";
-            }));
-            ILogger logger = loggerFactory.CreateLogger(this.className);
-            return logger;
+            using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+                builder.AddSimpleConsole(options =>
+                {
+                    options.IncludeScopes = true;
+                    options.SingleLine = true;
+                    options.TimestampFormat = "MM/dd/yyyy HH:mm:ss ";
+                }));
+            return loggerFactory.CreateLogger(_className);
         }
     }
 }
