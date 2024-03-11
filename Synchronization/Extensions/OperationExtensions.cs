@@ -19,55 +19,55 @@ namespace Synchronization.Extensions
 
             var _log = new ConsoleLog("Copy");
 
-            foreach (var sourcePath in Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories))
-            {
-                var tempPath = sourcePath.Substring(source.FullName.Length);
-                var newCombinePath = Path.Combine(target.FullName, tempPath);
-                var value = new DirectoryInfo(newCombinePath);
-                if (value.Exists)
-                    continue;
-
-                Console.WriteLine(newCombinePath);
-                Directory.CreateDirectory(newCombinePath);
-                _logFile.WriteFile("Directory Creation", "", sourcePath, newCombinePath);
-                _log.Info(string.Format("Directory(s) {0} created succesfully.", tempPath));
-            }    
-
-            foreach (var sourcePath in Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories))
-            {
-                foreach (var sourceFile in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            GetDirsFromSourcePath(source)
+                .ForEach(x =>
                 {
-                    var tempPath = sourceFile.Substring(target.FullName.Length-1);
-                    var newPath = Path.Combine(target.FullName, tempPath);
-                    if (!File.Exists(newPath))
+                    var tempPath = x.Substring(source.FullName.Length);
+                    var newCombinePath = Path.Combine(target.FullName, tempPath);
+                    var value = new DirectoryInfo(newCombinePath);
+                    if (!value.Exists)
                     {
-                        if (File.Exists(sourceFile))
-                        {
-                            _checkSum.SHA256CheckSum(sourceFile);
-                            new FileInfo(sourceFile).CopyTo(newPath, true);
-                            _logFile.WriteFile("copy", sourceFile, sourcePath, newPath);
-                            _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
+                        Directory.CreateDirectory(newCombinePath);
+                        _logFile.WriteFile("Directory Creation", "", x, newCombinePath);
+                        _log.Info(string.Format("Directory(s) {0} created succesfully.", tempPath));
+                    }
+                });
 
+            GetDirsFromSourcePath(source)
+                .ForEach(x =>
+                {
+                    foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
+                    {
+                        var tempPath = sourceFile.Substring(target.FullName.Length - 1);
+                        var newPath = Path.Combine(target.FullName, tempPath);
+                        if (!File.Exists(newPath))
+                        {
+                            if (File.Exists(sourceFile))
+                            {
+                                _checkSum.SHA256CheckSum(sourceFile);
+                                new FileInfo(sourceFile).CopyTo(newPath, true);
+                                _logFile.WriteFile("copy", sourceFile, x, newPath);
+                                _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
+                            }
                         }
                     }
-                }
-            }            
+                });
 
-            var files = source.GetFiles().Except(target.GetFiles());
-            if (files.Count() == 0) return;
-
-            foreach (var file in files)
-            {
-                if (!File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
-                {
-                    _checkSum.SHA256CheckSum(Path.Combine(source.FullName, Path.GetFileName(file.Name)));
-                    new FileInfo(Path.Combine(source.FullName, Path.GetFileName(file.Name)))
-                        .CopyTo(Path.Combine(target.FullName, Path.GetFileName(file.Name)), true);
-                    _logFile.WriteFile("copy", file.Name, source.FullName, target.FullName);
-                    _log.Info(string.Format("File(s) {0} copied succesfully.", file.Name));
-                }
-            }
+            source.GetFiles().Except(target.GetFiles())
+                 .ToList()
+                 .ForEach(file =>
+                 {
+                     if (!File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
+                     {
+                         _checkSum.SHA256CheckSum(Path.Combine(source.FullName, Path.GetFileName(file.Name)));
+                         new FileInfo(Path.Combine(source.FullName, Path.GetFileName(file.Name)))
+                            .CopyTo(Path.Combine(target.FullName, Path.GetFileName(file.Name)), true);
+                         _logFile.WriteFile("copy", file.Name, source.FullName, target.FullName);
+                         _log.Info(string.Format("File(s) {0} copied succesfully.", file.Name));
+                     }
+                 });
         }
+    
 
         /// <summary>
         /// Extension Method <c>Update</c> updates file(s) from source folder to destination folder
@@ -184,7 +184,12 @@ namespace Synchronization.Extensions
                     }                        
                 }
             }
-        }        
+        }
+
+        private static List<string> GetDirsFromSourcePath(DirectoryInfo source)
+        {
+            return Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories).ToList();
+        }
     }
 }
    
