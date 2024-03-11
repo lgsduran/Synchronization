@@ -67,7 +67,7 @@ namespace Synchronization.Extensions
                      }
                  });
         }
-    
+
 
         /// <summary>
         /// Extension Method <c>Update</c> updates file(s) from source folder to destination folder
@@ -81,110 +81,117 @@ namespace Synchronization.Extensions
 
             var _log = new ConsoleLog("Update");
 
-            foreach (var sourcePath in Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories))
-            {
-                foreach (var sourceFile in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                {
-                    var tempPath = sourceFile.Substring(target.FullName.Length-1);
-                    var newPath = Path.Combine(target.FullName, tempPath);
-                    if (File.Exists(newPath) && File.Exists(sourceFile))
-                    {
-                        var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
-                        var checkingDest = _checkSum.SHA256CheckSum(newPath);
-                        if (String.Equals(checkingSrc, checkingDest))
-                            continue;
+            GetDirsFromSourcePath(source)
+               .ForEach(x =>
+               {
+                   foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
+                   {
+                       var tempPath = sourceFile.Substring(target.FullName.Length - 1);
+                       var newPath = Path.Combine(target.FullName, tempPath);
+                       if (File.Exists(newPath) && File.Exists(sourceFile))
+                       {
+                           var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
+                           var checkingDest = _checkSum.SHA256CheckSum(newPath);
+                           if (String.Equals(checkingSrc, checkingDest))
+                               continue;
 
-                        _checkSum.SHA256CheckSum(sourceFile);
-                        File.Copy(sourceFile, newPath, true);
-                        _logFile.WriteFile("Update", sourceFile, sourcePath, newPath);
-                        _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                           _checkSum.SHA256CheckSum(sourceFile);
+                           File.Copy(sourceFile, newPath, true);
+                           _logFile.WriteFile("Update", sourceFile, x, newPath);
+                           _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                       }
+                   }
+               });
+
+            source.GetFiles()
+                .ToList()
+                .ForEach(s =>
+                {
+                    target.GetFiles()
+                    .ToList()
+                    .ForEach(d =>
+                    {
+                        {
+                            if (string.Equals(s.Name, d.Name))
+                            {
+                                if (File.Exists(d.ToString()))
+                                {
+                                    var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
+                                    var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
+                                    if (!string.Equals(checkingSrc, checkingDest))
+                                    {
+                                        _checkSum.SHA256CheckSum(d.ToString());
+                                        s.CopyTo(d.ToString(), true);
+                                        _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
+                                        _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });        
+        }
+
+            /// <summary>
+            /// Extension Method <c>Delete</c> deletes file(s) from destination folder
+            /// when the source folder does not have the same file(s) as in
+            /// destination folder.
+            /// </summary>
+            public static void Delete(this DirectoryInfo source, DirectoryInfo target)
+            {
+                if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
+                    throw new DirectoryNotFoundException("Directory not found!");
+
+                var _log = new ConsoleLog("Deleted");
+
+                foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
+                {
+                    var tempPath = targetPath.Substring(target.FullName.Length);
+                    var newPath = Path.Combine(source.FullName, tempPath);
+                    if (!Directory.Exists(newPath))
+                    {
+                        if (Directory.Exists(targetPath))
+                        {
+                            Directory.Delete(targetPath, true);                       
+                            _log.Info(string.Format("Deleted: {0}", newPath));
+                        }                        
                     }
                 }
-            }
 
-            foreach (var src in source.GetFiles())
-            {
-                foreach (var dest in target.GetFiles())
+                foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
                 {
-                    if (string.Equals(src.Name, dest.Name))
+                    foreach (var targetFile in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
                     {
-                        if (File.Exists(dest.ToString()))
+                        var tempPath = targetFile.Substring(target.FullName.Length);
+                        var newPath = Path.Combine(source.FullName, tempPath);
+                        if (!File.Exists(newPath))
                         {
-                            var checkingSrc = _checkSum.SHA256CheckSum(src.ToString());
-                            var checkingDest = _checkSum.SHA256CheckSum(dest.ToString());
-                            if (String.Equals(checkingSrc, checkingDest))
-                                continue;
-
-                            _checkSum.SHA256CheckSum(dest.ToString());
-                            src.CopyTo(dest.ToString(), true);
-                            _logFile.WriteFile("Update", src.Name, source.FullName, target.FullName);
-                            _log.Info(string.Format("File(s) {0} updated succesfully.", src.Name));
+                            if (File.Exists(targetFile))
+                            {
+                                File.Delete(targetFile);
+                                _logFile.WriteFile("Delete", targetFile, "", newPath);
+                                _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
+                            }                            
                         }
                     }
                 }
-            }
-        }
 
-        /// <summary>
-        /// Extension Method <c>Delete</c> deletes file(s) from destination folder
-        /// when the source folder does not have the same file(s) as in
-        /// destination folder.
-        /// </summary>
-        public static void Delete(this DirectoryInfo source, DirectoryInfo target)
-        {
-            if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
-                throw new DirectoryNotFoundException("Directory not found!");
+                var files = target.GetFiles().Except(source.GetFiles());
+                if (files.Count() == 0) return;
 
-            var _log = new ConsoleLog("Deleted");
-
-            foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
-            {
-                var tempPath = targetPath.Substring(target.FullName.Length);
-                var newPath = Path.Combine(source.FullName, tempPath);
-                if (!Directory.Exists(newPath))
+                foreach (var file in files)
                 {
-                    if (Directory.Exists(targetPath))
+                    if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
                     {
-                        Directory.Delete(targetPath, true);                       
-                        _log.Info(string.Format("Deleted: {0}", newPath));
-                    }                        
-                }
-            }
-
-            foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
-            {
-                foreach (var targetFile in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
-                {
-                    var tempPath = targetFile.Substring(target.FullName.Length);
-                    var newPath = Path.Combine(source.FullName, tempPath);
-                    if (!File.Exists(newPath))
-                    {
-                        if (File.Exists(targetFile))
+                        if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
                         {
-                            File.Delete(targetFile);
-                            _logFile.WriteFile("Delete", targetFile, "", newPath);
-                            _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
-                        }                            
+                            File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
+                            _logFile.WriteFile("Delete", file.Name, "", target.FullName);
+                            _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
+                        }                        
                     }
                 }
             }
-
-            var files = target.GetFiles().Except(source.GetFiles());
-            if (files.Count() == 0) return;
-
-            foreach (var file in files)
-            {
-                if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
-                {
-                    if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
-                    {
-                        File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
-                        _logFile.WriteFile("Delete", file.Name, "", target.FullName);
-                        _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
-                    }                        
-                }
-            }
-        }
 
         private static List<string> GetDirsFromSourcePath(DirectoryInfo source)
         {
