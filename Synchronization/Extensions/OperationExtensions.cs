@@ -114,7 +114,7 @@ namespace Synchronization.Extensions
                         {
                             if (string.Equals(s.Name, d.Name))
                             {
-                                if (File.Exists(d.ToString()))
+                                if (d.Exists)
                                 {
                                     var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
                                     var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
