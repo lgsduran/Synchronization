@@ -108,27 +108,27 @@ namespace Synchronization.Extensions
                 .ForEach(s =>
                 {
                     target.GetFiles()
-                    .ToList()
-                    .ForEach(d =>
-                    {
+                        .ToList()
+                        .ForEach(d =>
                         {
-                            if (string.Equals(s.Name, d.Name))
                             {
-                                if (d.Exists)
+                                if (string.Equals(s.Name, d.Name))
                                 {
-                                    var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
-                                    var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
-                                    if (!string.Equals(checkingSrc, checkingDest))
+                                    if (d.Exists)
                                     {
-                                        _checkSum.SHA256CheckSum(d.ToString());
-                                        s.CopyTo(d.ToString(), true);
-                                        _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
-                                        _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
+                                        var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
+                                        var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
+                                        if (!string.Equals(checkingSrc, checkingDest))
+                                        {
+                                            _checkSum.SHA256CheckSum(d.ToString());
+                                            s.CopyTo(d.ToString(), true);
+                                            _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
+                                            _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
                 });        
         }
 
@@ -152,7 +152,8 @@ namespace Synchronization.Extensions
                     {
                         if (Directory.Exists(targetPath))
                         {
-                            Directory.Delete(targetPath, true);                       
+                            Directory.Delete(targetPath, true);
+                            _logFile.WriteFile("Delete", newPath, "", "");
                             _log.Info(string.Format("Deleted: {0}", newPath));
                         }                        
                     }
@@ -176,10 +177,9 @@ namespace Synchronization.Extensions
                     }
                 }
 
-                var files = target.GetFiles().Except(source.GetFiles());
-                if (files.Count() == 0) return;
-
-                foreach (var file in files)
+            target.GetFiles().Except(source.GetFiles())
+                .ToList()
+                .ForEach(file =>
                 {
                     if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
                     {
@@ -188,9 +188,9 @@ namespace Synchronization.Extensions
                             File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
                             _logFile.WriteFile("Delete", file.Name, "", target.FullName);
                             _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
-                        }                        
+                        }
                     }
-                }
+                });
             }
 
         private static List<string> GetDirsFromSourcePath(DirectoryInfo source)
