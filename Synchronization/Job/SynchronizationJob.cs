@@ -21,23 +21,19 @@ namespace Synchronization.Job
         public Task Execute(IJobExecutionContext context)
         {
             var _log = new ConsoleLog("SynchronizationJob");
-            var sourceFolder = FolderOptions.SourceFolder;
-            var destinationFolder = FolderOptions.DestinationFolder;
+            var source = FolderOptions.SourceFolder;
+            var target = FolderOptions.DestinationFolder;
 
             //It throws FilePathException in case of any mistake with the file paths
-            if (string.IsNullOrWhiteSpace(sourceFolder) || string.IsNullOrWhiteSpace(destinationFolder))
+            if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(target))
                 throw new FilePathException("No empty path is allowed!");
 
-            var _update = new Update();
-            _update.UpdateFiles(sourceFolder, destinationFolder);
+            new OperationImpl()
+                .InitializeOperation(new DirectoryInfo(source), new DirectoryInfo(target))
+                .Update()
+                .Copy()
+                .Delete();
 
-            var _copy = new Copy();
-            _copy.CopyFiles(sourceFolder, destinationFolder);
-
-            var _delete = new Delete();
-            _delete.DeleteFiles(sourceFolder, destinationFolder);
-
-            _log.Info("Executing job.");
             return Task.CompletedTask;
         }
     }

@@ -14,12 +14,9 @@ namespace Synchronization.Extensions
         /// </summary>
         public static void Copy(this DirectoryInfo source, DirectoryInfo target)
         {
-            if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
-                throw new DirectoryNotFoundException("Directory not found!");
-
             var _log = new ConsoleLog("Copy");
 
-            GetDirsFromSourcePath(source)
+            GetAllDirectories(source)
                 .ForEach(x =>
                 {
                     var tempPath = x.Substring(source.FullName.Length);
@@ -33,7 +30,7 @@ namespace Synchronization.Extensions
                     }
                 });
 
-            GetDirsFromSourcePath(source)
+            GetAllDirectories(source)
                 .ForEach(x =>
                 {
                     foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
@@ -76,12 +73,9 @@ namespace Synchronization.Extensions
         /// </summary>
         public static void Update(this DirectoryInfo source, DirectoryInfo target)
         {
-            if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
-                throw new DirectoryNotFoundException("Directory not found!");
-
             var _log = new ConsoleLog("Update");
 
-            GetDirsFromSourcePath(source)
+            GetAllDirectories(source)
                .ForEach(x =>
                {
                    foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
@@ -139,63 +133,62 @@ namespace Synchronization.Extensions
             /// </summary>
             public static void Delete(this DirectoryInfo source, DirectoryInfo target)
             {
-                if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
-                    throw new DirectoryNotFoundException("Directory not found!");
-
                 var _log = new ConsoleLog("Deleted");
 
-                foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
-                {
-                    var tempPath = targetPath.Substring(target.FullName.Length);
-                    var newPath = Path.Combine(source.FullName, tempPath);
-                    if (!Directory.Exists(newPath))
+                GetAllDirectories(target)
+                    .ForEach(x =>
                     {
-                        if (Directory.Exists(targetPath))
-                        {
-                            Directory.Delete(targetPath, true);
-                            _logFile.WriteFile("Delete", newPath, "", "");
-                            _log.Info(string.Format("Deleted: {0}", newPath));
-                        }                        
-                    }
-                }
-
-                foreach (var targetPath in Directory.GetDirectories(target.FullName, "*.*", SearchOption.AllDirectories))
-                {
-                    foreach (var targetFile in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
-                    {
-                        var tempPath = targetFile.Substring(target.FullName.Length);
+                        var tempPath = x.Substring(target.FullName.Length);
                         var newPath = Path.Combine(source.FullName, tempPath);
-                        if (!File.Exists(newPath))
+                        if (!Directory.Exists(newPath))
                         {
-                            if (File.Exists(targetFile))
+                            if (Directory.Exists(x))
                             {
-                                File.Delete(targetFile);
-                                _logFile.WriteFile("Delete", targetFile, "", newPath);
-                                _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
-                            }                            
+                                Directory.Delete(x, true);
+                                _logFile.WriteFile("Delete", newPath, "", "");
+                                _log.Info(string.Format("Deleted: {0}", newPath));
+                            }
                         }
-                    }
-                }
+                    });
 
-            target.GetFiles().Except(source.GetFiles())
-                .ToList()
-                .ForEach(file =>
-                {
-                    if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
+                GetAllDirectories(target)
+                    .ForEach(x =>
                     {
-                        if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
+                        foreach (var targetFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
                         {
-                            File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
-                            _logFile.WriteFile("Delete", file.Name, "", target.FullName);
-                            _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
+                            var tempPath = targetFile.Substring(target.FullName.Length);
+                            var newPath = Path.Combine(source.FullName, tempPath);
+                            if (!File.Exists(newPath))
+                            {
+                                if (File.Exists(targetFile))
+                                {
+                                    File.Delete(targetFile);
+                                    _logFile.WriteFile("Delete", targetFile, "", newPath);
+                                    _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
+                                }                            
+                            }
+                        }                
+                    });
+
+                target.GetFiles().Except(source.GetFiles())
+                    .ToList()
+                    .ForEach(file =>
+                    {
+                        if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
+                        {
+                            if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
+                            {
+                                File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
+                                _logFile.WriteFile("Delete", file.Name, "", target.FullName);
+                                _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
+                            }
                         }
-                    }
-                });
+                    });
             }
 
-        private static List<string> GetDirsFromSourcePath(DirectoryInfo source)
+        private static List<string> GetAllDirectories(DirectoryInfo directoryInfo)
         {
-            return Directory.GetDirectories(source.FullName, "*.*", SearchOption.AllDirectories).ToList();
+            return Directory.GetDirectories(directoryInfo.FullName, "*.*", SearchOption.AllDirectories).ToList();
         }
     }
 }
