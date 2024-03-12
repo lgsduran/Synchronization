@@ -5,8 +5,8 @@ namespace Synchronization.Extensions
 {
     public static class OperationExtensions
     {
-        private static CheckSumUtils _checkSum = new CheckSumUtils();
-        private static WriteLogFileUtils _logFile = new WriteLogFileUtils();
+        private static readonly CheckSumUtils _checkSum = new();
+        private static readonly WriteLogFileUtils _logFile = new();
 
         /// <summary>
         /// Extention Method <c>Copy</c> copies file(s) from source folder to destination folder
