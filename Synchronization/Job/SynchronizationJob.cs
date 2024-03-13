@@ -29,7 +29,7 @@ namespace Synchronization.Job
                 throw new FilePathException("No empty path is allowed!");
 
             new OperationImpl()
-                .InitializeOperation(new DirectoryInfo(source), new DirectoryInfo(target))
+                .InitializeOperation(source, target)
                 .Update()
                 .Copy()
                 .Delete();

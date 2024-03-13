@@ -7,13 +7,13 @@ namespace Synchronization.Operations
         private DirectoryInfo _source = null!;
         private DirectoryInfo _target = null!;
 
-        public OperationImpl InitializeOperation(DirectoryInfo source, DirectoryInfo target)
+        public OperationImpl InitializeOperation(string source, string target)
 		{            
-            if (string.Equals(source.FullName, target.FullName, StringComparison.OrdinalIgnoreCase))
-                throw new DirectoryNotFoundException("Directory not found!");
-
-            _source = source;
-            _target = target;           
+            _source = new DirectoryInfo(source);
+            _target = new DirectoryInfo(target);
+            
+            if (string.Equals(_source.FullName, _target.FullName, StringComparison.OrdinalIgnoreCase))
+                throw new DirectoryNotFoundException("Directory not found!");            
 
             return this;
         }
