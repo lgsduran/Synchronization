@@ -33,25 +33,25 @@ namespace Synchronization.Extensions
             GetAllDirectories(source)
                 .ForEach(x =>
                 {
-                    foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
-                    {
-                        var tempPath = sourceFile.Substring(target.FullName.Length - 1);
-                        var newPath = Path.Combine(target.FullName, tempPath);
-                        if (!File.Exists(newPath))
-                        {
-                            if (File.Exists(sourceFile))
+                    GetAllFiles(x)
+                        .ForEach(sourceFile =>
+                        { 
+                            var tempPath = sourceFile.Substring(target.FullName.Length - 1);
+                            var newPath = Path.Combine(target.FullName, tempPath);
+                            if (!File.Exists(newPath))
                             {
-                                _checkSum.SHA256CheckSum(sourceFile);
-                                new FileInfo(sourceFile).CopyTo(newPath, true);
-                                _logFile.WriteFile("copy", sourceFile, x, newPath);
-                                _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
+                                if (File.Exists(sourceFile))
+                                {
+                                    _checkSum.SHA256CheckSum(sourceFile);
+                                    new FileInfo(sourceFile).CopyTo(newPath, true);
+                                    _logFile.WriteFile("copy", sourceFile, x, newPath);
+                                    _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
+                                }
                             }
-                        }
-                    }
+                        });
                 });
 
-            source.GetFiles().Except(target.GetFiles())
-                 .ToList()
+            source.Except(target)                 
                  .ForEach(file =>
                  {
                      if (!File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
@@ -78,7 +78,8 @@ namespace Synchronization.Extensions
             GetAllDirectories(source)
                .ForEach(x =>
                {
-                   foreach (var sourceFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
+                   GetAllFiles(x)
+                   .ForEach(sourceFile =>
                    {
                        var tempPath = sourceFile.Substring(target.FullName.Length - 1);
                        var newPath = Path.Combine(target.FullName, tempPath);
@@ -87,14 +88,14 @@ namespace Synchronization.Extensions
                            var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
                            var checkingDest = _checkSum.SHA256CheckSum(newPath);
                            if (String.Equals(checkingSrc, checkingDest))
-                               continue;
-
-                           _checkSum.SHA256CheckSum(sourceFile);
-                           File.Copy(sourceFile, newPath, true);
-                           _logFile.WriteFile("Update", sourceFile, x, newPath);
-                           _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                           {
+                               _checkSum.SHA256CheckSum(sourceFile);
+                               File.Copy(sourceFile, newPath, true);
+                               _logFile.WriteFile("Update", sourceFile, x, newPath);
+                               _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                           }                               
                        }
-                   }
+                   });
                });
 
             source.GetFiles()
@@ -154,8 +155,9 @@ namespace Synchronization.Extensions
                 GetAllDirectories(target)
                     .ForEach(x =>
                     {
-                        foreach (var targetFile in Directory.GetFiles(x, "*.*", SearchOption.AllDirectories))
-                        {
+                        GetAllFiles(x)
+                        .ForEach(targetFile =>
+                        {                   
                             var tempPath = targetFile.Substring(target.FullName.Length);
                             var newPath = Path.Combine(source.FullName, tempPath);
                             if (!File.Exists(newPath))
@@ -167,11 +169,10 @@ namespace Synchronization.Extensions
                                     _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
                                 }                            
                             }
-                        }                
+                        });
                     });
 
-                target.GetFiles().Except(source.GetFiles())
-                    .ToList()
+                target.Except(source)                    
                     .ForEach(file =>
                     {
                         if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
@@ -190,6 +191,12 @@ namespace Synchronization.Extensions
         {
             return Directory.GetDirectories(directoryInfo.FullName, "*.*", SearchOption.AllDirectories).ToList();
         }
+
+        private static List<string> GetAllFiles(string path)
+        {
+            return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList();
+        }
     }
 }
+
    

@@ -24,9 +24,6 @@ test-results/
 # Icon must end with two \r
 Icon
 
-.DS_Store
-
-
 # Thumbnails
 ._*
 
@@ -405,3 +402,5 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+.txt
