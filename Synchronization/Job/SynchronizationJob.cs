@@ -34,6 +34,7 @@ namespace Synchronization.Job
                 .Copy()
                 .Delete();
 
+            _log.Info("Executing job.");
             return Task.CompletedTask;
         }
     }
