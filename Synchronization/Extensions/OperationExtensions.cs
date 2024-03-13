@@ -105,24 +105,23 @@ namespace Synchronization.Extensions
                     target.GetFiles()
                         .ToList()
                         .ForEach(d =>
-                        {
+                        {                            
+                            if (string.Equals(s.Name, d.Name))
                             {
-                                if (string.Equals(s.Name, d.Name))
+                                if (d.Exists)
                                 {
-                                    if (d.Exists)
+                                    var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
+                                    var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
+                                    if (!string.Equals(checkingSrc, checkingDest))
                                     {
-                                        var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
-                                        var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
-                                        if (!string.Equals(checkingSrc, checkingDest))
-                                        {
-                                            _checkSum.SHA256CheckSum(d.ToString());
-                                            s.CopyTo(d.ToString(), true);
-                                            _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
-                                            _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
-                                        }
+                                        _checkSum.SHA256CheckSum(d.ToString());
+                                        s.CopyTo(d.ToString(), true);
+                                        _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
+                                        _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
                                     }
                                 }
                             }
+                            
                         });
                 });        
         }
