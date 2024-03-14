@@ -10,8 +10,8 @@ class Program
     private static ConsoleLog _log = new ConsoleLog("Main");
     static async Task Main(string[] args)
     {
-
-        string _settingsPath = @"/Users/luizduran/Projects/Synchronization/Synchronization/Settings/appsettings.json";
+        //string _settingsPath = @"/Users/luizduran/Projects/Synchronization/Synchronization/Settings/appsettings.json";
+        var _settingsPath = "/app/settings/appsettings.json";
         //Load paths
         GetSettings(_settingsPath);
         var _schedulerFactory = new StdSchedulerFactory();
@@ -42,9 +42,10 @@ class Program
 
         // and last shut down the scheduler when you are ready to close your program
         await scheduler.Shutdown();
+        _log.Info("scheduler has been shut down.");
 
-        Console.WriteLine("Press any key to close the application");
-        Console.ReadKey();
+        //Console.WriteLine("Press any key to close the application");
+        //Console.ReadKey();
     }
 
     /// <summary>

@@ -87,7 +87,7 @@ namespace Synchronization.Extensions
                        {
                            var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
                            var checkingDest = _checkSum.SHA256CheckSum(newPath);
-                           if (String.Equals(checkingSrc, checkingDest))
+                           if (!String.Equals(checkingSrc, checkingDest))
                            {
                                _checkSum.SHA256CheckSum(sourceFile);
                                File.Copy(sourceFile, newPath, true);
@@ -145,8 +145,8 @@ namespace Synchronization.Extensions
                             if (Directory.Exists(x))
                             {
                                 Directory.Delete(x, true);
-                                _logFile.WriteFile("Delete", newPath, "", "");
-                                _log.Info(string.Format("Deleted: {0}", newPath));
+                                _logFile.WriteFile("Delete", x, "", "");
+                                _log.Info(string.Format("Deleted: {0}", x));
                             }
                         }
                     });
