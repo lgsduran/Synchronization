@@ -6,6 +6,16 @@
         {
 			return source.GetFiles().Except(target.GetFiles()).ToList();
         }
+
+        public static List<FileInfo> AddFiles(this List<FileInfo> list, DirectoryInfo target)
+        {
+            foreach(var file in target.GetFiles().ToList())
+            {
+                list.Add(file);
+            }
+
+            return list;
+        }
     }
 }
 

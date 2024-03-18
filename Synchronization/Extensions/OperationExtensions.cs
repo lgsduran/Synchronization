@@ -7,6 +7,7 @@ namespace Synchronization.Extensions
     {
         private static readonly CheckSumUtils _checkSum = new();
         private static readonly WriteLogFileUtils _logFile = new();
+        private static List<FileInfo> fileList = new List<FileInfo>();
 
         /// <summary>
         /// Extention Method <c>Copy</c> copies file(s) from source folder to destination folder
@@ -98,12 +99,10 @@ namespace Synchronization.Extensions
                    });
                });
 
-            source.GetFiles()
-                .ToList()
-                .ForEach(s =>
-                {
-                    target.GetFiles()
-                        .ToList()
+               fileList.AddFiles(source)
+               .ForEach(s =>
+               {
+                   fileList.AddFiles(target)
                         .ForEach(d =>
                         {                            
                             if (string.Equals(s.Name, d.Name))
@@ -123,7 +122,7 @@ namespace Synchronization.Extensions
                             }
                             
                         });
-                });        
+               });        
         }
 
             /// <summary>
@@ -155,20 +154,20 @@ namespace Synchronization.Extensions
                     .ForEach(x =>
                     {
                         GetAllFiles(x)
-                        .ForEach(targetFile =>
-                        {                   
-                            var tempPath = targetFile.Substring(target.FullName.Length);
-                            var newPath = Path.Combine(source.FullName, tempPath);
-                            if (!File.Exists(newPath))
-                            {
-                                if (File.Exists(targetFile))
+                            .ForEach(targetFile =>
+                            {                   
+                                var tempPath = targetFile.Substring(target.FullName.Length);
+                                var newPath = Path.Combine(source.FullName, tempPath);
+                                if (!File.Exists(newPath))
                                 {
-                                    File.Delete(targetFile);
-                                    _logFile.WriteFile("Delete", targetFile, "", newPath);
-                                    _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
-                                }                            
-                            }
-                        });
+                                    if (File.Exists(targetFile))
+                                    {
+                                        File.Delete(targetFile);
+                                        _logFile.WriteFile("Delete", targetFile, "", newPath);
+                                        _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
+                                    }                            
+                                }
+                            });
                     });
 
                 target.Except(source)                    

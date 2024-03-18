@@ -54,6 +54,7 @@ class Program
     private static void GetSettings(string settingsPath)
     {
         var builder = new ConfigurationBuilder()
+                //.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(settingsPath, optional: false);
 
         try
