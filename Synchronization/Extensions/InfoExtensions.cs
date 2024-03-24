@@ -16,6 +16,26 @@
 
             return list;
         }
+
+        public static List<string> AddFiles(this List<string> list, string path)
+        {
+            foreach (var dir in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList())
+            {
+                list.Add(dir);
+            }
+
+            return list;
+        }
+
+        public static List<string> AddDirectory(this List<string> list, string fullName)
+        {
+            foreach (var dir in Directory.GetDirectories(fullName, "*.*", SearchOption.AllDirectories).ToList())
+            {
+                list.Add(dir);
+            }
+
+            return list;
+        }       
     }
 }
 

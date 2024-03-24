@@ -16,8 +16,5 @@ RUN dotnet publish "Synchronization.csproj" -c Release -o /app/publish /p:UseApp
 
 FROM base AS final
 WORKDIR /app
-RUN mkdir settings
-COPY Synchronization/Settings/*.json /app/settings/
-WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Synchronization.dll"]

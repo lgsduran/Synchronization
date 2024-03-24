@@ -7,7 +7,9 @@ namespace Synchronization.Extensions
     {
         private static readonly CheckSumUtils _checkSum = new();
         private static readonly WriteLogFileUtils _logFile = new();
-        private static List<FileInfo> fileList = new List<FileInfo>();
+        private static List<FileInfo> fileList = new();
+        private static List<string> filesList = new();
+        private static List<string> DirectoryList = new();
 
         /// <summary>
         /// Extention Method <c>Copy</c> copies file(s) from source folder to destination folder
@@ -17,7 +19,7 @@ namespace Synchronization.Extensions
         {
             var _log = new ConsoleLog("Copy");
 
-            GetAllDirectories(source)
+            DirectoryList.AddDirectory(source.FullName)
                 .ForEach(x =>
                 {
                     var tempPath = x.Substring(source.FullName.Length);
@@ -31,10 +33,10 @@ namespace Synchronization.Extensions
                     }
                 });
 
-            GetAllDirectories(source)
+            DirectoryList.AddDirectory(source.FullName)
                 .ForEach(x =>
                 {
-                    GetAllFiles(x)
+                    filesList.AddFiles(x)
                         .ForEach(sourceFile =>
                         { 
                             var tempPath = sourceFile.Substring(target.FullName.Length - 1);
@@ -76,10 +78,10 @@ namespace Synchronization.Extensions
         {
             var _log = new ConsoleLog("Update");
 
-            GetAllDirectories(source)
+            DirectoryList.AddDirectory(source.FullName)
                .ForEach(x =>
                {
-                   GetAllFiles(x)
+                   filesList.AddFiles(x)
                    .ForEach(sourceFile =>
                    {
                        var tempPath = sourceFile.Substring(target.FullName.Length - 1);
@@ -134,7 +136,7 @@ namespace Synchronization.Extensions
             {
                 var _log = new ConsoleLog("Deleted");
 
-                GetAllDirectories(target)
+            DirectoryList.AddDirectory(target.FullName)
                     .ForEach(x =>
                     {
                         var tempPath = x.Substring(target.FullName.Length);
@@ -150,10 +152,11 @@ namespace Synchronization.Extensions
                         }
                     });
 
-                GetAllDirectories(target)
+                //GetAllDirectories(target)
+                DirectoryList.AddDirectory(target.FullName)
                     .ForEach(x =>
                     {
-                        GetAllFiles(x)
+                        filesList.AddFiles(x)
                             .ForEach(targetFile =>
                             {                   
                                 var tempPath = targetFile.Substring(target.FullName.Length);
@@ -184,16 +187,6 @@ namespace Synchronization.Extensions
                         }
                     });
             }
-
-        private static List<string> GetAllDirectories(DirectoryInfo directoryInfo)
-        {
-            return Directory.GetDirectories(directoryInfo.FullName, "*.*", SearchOption.AllDirectories).ToList();
-        }
-
-        private static List<string> GetAllFiles(string path)
-        {
-            return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList();
-        }
     }
 }
 

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synchronization", "Synchron
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9E869B0A-CC0D-417A-9187-9F1BED7F5052}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synchronization.Tests", "..\Synchronization.Tests\Synchronization.Tests.csproj", "{849FE675-0751-48F3-AA05-97063161AB3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9E869B0A-CC0D-417A-9187-9F1BED7F5052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E869B0A-CC0D-417A-9187-9F1BED7F5052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E869B0A-CC0D-417A-9187-9F1BED7F5052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849FE675-0751-48F3-AA05-97063161AB3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849FE675-0751-48F3-AA05-97063161AB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849FE675-0751-48F3-AA05-97063161AB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849FE675-0751-48F3-AA05-97063161AB3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,30 +25,10 @@
     <None Remove="Extensions\" />
     <None Remove="destFolder\" />
   </ItemGroup>
+
   <ItemGroup>
-    <Folder Include="Exception\" />
-    <Folder Include="Operations\" />
-    <Folder Include="Job\" />
-    <Folder Include="Logs\" />
-    <Folder Include="Settings\" />
-    <Folder Include="Utils\" />
-    <Folder Include="srcFolder\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
-    <Folder Include="destFolder\" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
