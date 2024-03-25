@@ -11,13 +11,13 @@ namespace Synchronization.Settings
         /// </summary>
         public static void GetSettings()
         {
-            var config = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    //.AddJsonFile(settingsPath, optional: false);
-                    .AddJsonFile("appsettings.json").Build();
             try
             {
-                //IConfiguration config = builder.Build();
+                var config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                          
                 FolderOptions.SourceFolder = config["Folders:SourceFolder"];
                 FolderOptions.DestinationFolder = config["Folders:DestinationFolder"];
                 FolderOptions.LogFilePath = config["Folders:LogFilePath"];

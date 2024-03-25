@@ -4,7 +4,8 @@
 	{
 		public static List<FileInfo> Except(this DirectoryInfo source, DirectoryInfo target)
         {
-			return source.GetFiles().Except(target.GetFiles()).ToList();
+			return source.GetFiles().Except(target.GetFiles())
+                .ToList();
         }
 
         public static List<FileInfo> RootFileSearcher(this DirectoryInfo directoryInfo)

@@ -99,29 +99,29 @@ namespace Synchronization.Extensions
                });
 
                source.RootFileSearcher()
-               .ForEach(src =>
-               {
-                   target.RootFileSearcher()
-                        .ForEach(dest =>
-                        {                            
-                            if (string.Equals(src.Name, dest.Name))
-                            {
-                                if (dest.Exists)
+                   .ForEach(src =>
+                   {
+                       target.RootFileSearcher()
+                            .ForEach(dest =>
+                            {                            
+                                if (string.Equals(src.Name, dest.Name))
                                 {
-                                    var checkingSrc = _checkSum.SHA256CheckSum(src.ToString());
-                                    var checkingDest = _checkSum.SHA256CheckSum(dest.ToString());
-                                    if (!string.Equals(checkingSrc, checkingDest))
+                                    if (dest.Exists)
                                     {
-                                        _checkSum.SHA256CheckSum(dest.ToString());
-                                        src.CopyTo(dest.ToString(), true);
-                                        _logFile.WriteFile("Update", src.Name, source.FullName, target.FullName);
-                                        _log.Info(string.Format("File(s) {0} updated succesfully.", dest.Name));
+                                        var checkingSrc = _checkSum.SHA256CheckSum(src.ToString());
+                                        var checkingDest = _checkSum.SHA256CheckSum(dest.ToString());
+                                        if (!string.Equals(checkingSrc, checkingDest))
+                                        {
+                                            _checkSum.SHA256CheckSum(dest.ToString());
+                                            src.CopyTo(dest.ToString(), true);
+                                            _logFile.WriteFile("Update", src.Name, source.FullName, target.FullName);
+                                            _log.Info(string.Format("File(s) {0} updated succesfully.", dest.Name));
+                                        }
                                     }
                                 }
-                            }
                             
-                        });
-               });        
+                            });
+                   });        
         }
 
         /// <summary>
@@ -149,7 +149,6 @@ namespace Synchronization.Extensions
                     }
                 });
 
-            //GetAllDirectories(target)
             target.FullName.DirectoriesSearcher()
                 .ForEach(src =>
                 {
