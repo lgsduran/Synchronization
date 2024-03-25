@@ -7,35 +7,23 @@
 			return source.GetFiles().Except(target.GetFiles()).ToList();
         }
 
-        public static List<FileInfo> AddFiles(this List<FileInfo> list, DirectoryInfo target)
+        public static List<FileInfo> RootFileSearcher(this DirectoryInfo directoryInfo)
         {
-            foreach(var file in target.GetFiles().ToList())
-            {
-                list.Add(file);
-            }
-
-            return list;
+            return directoryInfo.GetFiles()
+                .ToList();            
         }
 
-        public static List<string> AddFiles(this List<string> list, string path)
+        public static List<string> DirectoriesSearcher(this string fullName)
         {
-            foreach (var dir in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList())
-            {
-                list.Add(dir);
-            }
-
-            return list;
+            return Directory.GetDirectories(fullName, "*.*", SearchOption.AllDirectories)
+                .ToList();
         }
 
-        public static List<string> AddDirectory(this List<string> list, string fullName)
+        public static List<string> SubFileSeacher(this string path)
         {
-            foreach (var dir in Directory.GetDirectories(fullName, "*.*", SearchOption.AllDirectories).ToList())
-            {
-                list.Add(dir);
-            }
-
-            return list;
-        }       
+            return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
+                .ToList();
+        }
     }
 }
 

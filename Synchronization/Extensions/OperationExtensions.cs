@@ -7,9 +7,6 @@ namespace Synchronization.Extensions
     {
         private static readonly CheckSumUtils _checkSum = new();
         private static readonly WriteLogFileUtils _logFile = new();
-        private static List<FileInfo> fileList = new();
-        private static List<string> filesList = new();
-        private static List<string> DirectoryList = new();
 
         /// <summary>
         /// Extention Method <c>Copy</c> copies file(s) from source folder to destination folder
@@ -19,7 +16,7 @@ namespace Synchronization.Extensions
         {
             var _log = new ConsoleLog("Copy");
 
-            DirectoryList.AddDirectory(source.FullName)
+            source.FullName.DirectoriesSearcher()
                 .ForEach(x =>
                 {
                     var tempPath = x.Substring(source.FullName.Length);
@@ -33,10 +30,10 @@ namespace Synchronization.Extensions
                     }
                 });
 
-            DirectoryList.AddDirectory(source.FullName)
-                .ForEach(x =>
+            source.FullName.DirectoriesSearcher()
+                .ForEach(src =>
                 {
-                    filesList.AddFiles(x)
+                    src.SubFileSeacher()
                         .ForEach(sourceFile =>
                         { 
                             var tempPath = sourceFile.Substring(target.FullName.Length - 1);
@@ -47,7 +44,7 @@ namespace Synchronization.Extensions
                                 {
                                     _checkSum.SHA256CheckSum(sourceFile);
                                     new FileInfo(sourceFile).CopyTo(newPath, true);
-                                    _logFile.WriteFile("copy", sourceFile, x, newPath);
+                                    _logFile.WriteFile("copy", sourceFile, src, newPath);
                                     _log.Info(string.Format("File(s) {0} copied succesfully.", string.Join(",", sourceFile)));
                                 }
                             }
@@ -78,47 +75,47 @@ namespace Synchronization.Extensions
         {
             var _log = new ConsoleLog("Update");
 
-            DirectoryList.AddDirectory(source.FullName)
-               .ForEach(x =>
+            source.FullName.DirectoriesSearcher()
+               .ForEach(src =>
                {
-                   filesList.AddFiles(x)
-                   .ForEach(sourceFile =>
-                   {
-                       var tempPath = sourceFile.Substring(target.FullName.Length - 1);
-                       var newPath = Path.Combine(target.FullName, tempPath);
-                       if (File.Exists(newPath) && File.Exists(sourceFile))
+                   src.SubFileSeacher()
+                       .ForEach(sourceFile =>
                        {
-                           var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
-                           var checkingDest = _checkSum.SHA256CheckSum(newPath);
-                           if (!String.Equals(checkingSrc, checkingDest))
+                           var tempPath = sourceFile.Substring(target.FullName.Length - 1);
+                           var newPath = Path.Combine(target.FullName, tempPath);
+                           if (File.Exists(newPath) && File.Exists(sourceFile))
                            {
-                               _checkSum.SHA256CheckSum(sourceFile);
-                               File.Copy(sourceFile, newPath, true);
-                               _logFile.WriteFile("Update", sourceFile, x, newPath);
-                               _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
-                           }                               
-                       }
-                   });
+                               var checkingSrc = _checkSum.SHA256CheckSum(sourceFile);
+                               var checkingDest = _checkSum.SHA256CheckSum(newPath);
+                               if (!String.Equals(checkingSrc, checkingDest))
+                               {
+                                   _checkSum.SHA256CheckSum(sourceFile);
+                                   File.Copy(sourceFile, newPath, true);
+                                   _logFile.WriteFile("Update", sourceFile, src, newPath);
+                                   _log.Info(string.Format("File(s) {0} updated succesfully.", sourceFile));
+                               }                               
+                           }
+                       });
                });
 
-               fileList.AddFiles(source)
-               .ForEach(s =>
+               source.RootFileSearcher()
+               .ForEach(src =>
                {
-                   fileList.AddFiles(target)
-                        .ForEach(d =>
+                   target.RootFileSearcher()
+                        .ForEach(dest =>
                         {                            
-                            if (string.Equals(s.Name, d.Name))
+                            if (string.Equals(src.Name, dest.Name))
                             {
-                                if (d.Exists)
+                                if (dest.Exists)
                                 {
-                                    var checkingSrc = _checkSum.SHA256CheckSum(s.ToString());
-                                    var checkingDest = _checkSum.SHA256CheckSum(d.ToString());
+                                    var checkingSrc = _checkSum.SHA256CheckSum(src.ToString());
+                                    var checkingDest = _checkSum.SHA256CheckSum(dest.ToString());
                                     if (!string.Equals(checkingSrc, checkingDest))
                                     {
-                                        _checkSum.SHA256CheckSum(d.ToString());
-                                        s.CopyTo(d.ToString(), true);
-                                        _logFile.WriteFile("Update", s.Name, source.FullName, target.FullName);
-                                        _log.Info(string.Format("File(s) {0} updated succesfully.", d.Name));
+                                        _checkSum.SHA256CheckSum(dest.ToString());
+                                        src.CopyTo(dest.ToString(), true);
+                                        _logFile.WriteFile("Update", src.Name, source.FullName, target.FullName);
+                                        _log.Info(string.Format("File(s) {0} updated succesfully.", dest.Name));
                                     }
                                 }
                             }
@@ -127,66 +124,66 @@ namespace Synchronization.Extensions
                });        
         }
 
-            /// <summary>
-            /// Extension Method <c>Delete</c> deletes file(s) from destination folder
-            /// when the source folder does not have the same file(s) as in
-            /// destination folder.
-            /// </summary>
-            public static void Delete(this DirectoryInfo source, DirectoryInfo target)
-            {
-                var _log = new ConsoleLog("Deleted");
+        /// <summary>
+        /// Extension Method <c>Delete</c> deletes file(s) from destination folder
+        /// when the source folder does not have the same file(s) as in
+        /// destination folder.
+        /// </summary>
+        public static void Delete(this DirectoryInfo source, DirectoryInfo target)
+        {
+            var _log = new ConsoleLog("Deleted");
 
-            DirectoryList.AddDirectory(target.FullName)
-                    .ForEach(x =>
+            target.FullName.DirectoriesSearcher()
+                .ForEach(x =>
+                {
+                    var tempPath = x.Substring(target.FullName.Length);
+                    var newPath = Path.Combine(source.FullName, tempPath);
+                    if (!Directory.Exists(newPath))
                     {
-                        var tempPath = x.Substring(target.FullName.Length);
-                        var newPath = Path.Combine(source.FullName, tempPath);
-                        if (!Directory.Exists(newPath))
+                        if (Directory.Exists(x))
                         {
-                            if (Directory.Exists(x))
-                            {
-                                Directory.Delete(x, true);
-                                _logFile.WriteFile("Delete", x, "", "");
-                                _log.Info(string.Format("Deleted: {0}", x));
-                            }
+                            Directory.Delete(x, true);
+                            _logFile.WriteFile("Delete", x, "", "");
+                            _log.Info(string.Format("Deleted: {0}", x));
                         }
-                    });
+                    }
+                });
 
-                //GetAllDirectories(target)
-                DirectoryList.AddDirectory(target.FullName)
-                    .ForEach(x =>
-                    {
-                        filesList.AddFiles(x)
-                            .ForEach(targetFile =>
-                            {                   
-                                var tempPath = targetFile.Substring(target.FullName.Length);
-                                var newPath = Path.Combine(source.FullName, tempPath);
-                                if (!File.Exists(newPath))
+            //GetAllDirectories(target)
+            target.FullName.DirectoriesSearcher()
+                .ForEach(src =>
+                {
+                    src.SubFileSeacher()
+                        .ForEach(targetFile =>
+                        {                   
+                            var tempPath = targetFile.Substring(target.FullName.Length);
+                            var newPath = Path.Combine(source.FullName, tempPath);
+                            if (!File.Exists(newPath))
+                            {
+                                if (File.Exists(targetFile))
                                 {
-                                    if (File.Exists(targetFile))
-                                    {
-                                        File.Delete(targetFile);
-                                        _logFile.WriteFile("Delete", targetFile, "", newPath);
-                                        _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
-                                    }                            
-                                }
-                            });
-                    });
-
-                target.Except(source)                    
-                    .ForEach(file =>
-                    {
-                        if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
-                        {
-                            if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
-                            {
-                                File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
-                                _logFile.WriteFile("Delete", file.Name, "", target.FullName);
-                                _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
+                                    File.Delete(targetFile);
+                                    _logFile.WriteFile("Delete", targetFile, "", newPath);
+                                    _log.Info(string.Format("File(s) {0} deleted succesfully.", targetFile));
+                                }                            
                             }
+                        });
+                });
+
+            target.Except(source)                    
+                .ForEach(file =>
+                {
+                    if (!File.Exists(Path.Combine(source.FullName, Path.GetFileName(file.Name))))
+                    {
+                        if (File.Exists(Path.Combine(target.FullName, Path.GetFileName(file.Name))))
+                        {
+                            File.Delete(Path.Combine(target.FullName, Path.GetFileName(file.Name)));
+                            _logFile.WriteFile("Delete", file.Name, "", target.FullName);
+                            _log.Info(string.Format("File(s) {0} deleted succesfully.", file.Name));
                         }
-                    });
-            }
+                    }
+                });
+        }
     }
 }
 
