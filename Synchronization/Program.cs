@@ -10,7 +10,7 @@ class Program
     static async Task Main(string[] args)
     {
         //Load paths
-        Settings.GetSettings();
+        SettingOptions.GetSettings();
 
         var _schedulerFactory = new StdSchedulerFactory();
         var scheduler = await _schedulerFactory.GetScheduler();

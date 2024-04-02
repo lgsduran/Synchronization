@@ -3,7 +3,7 @@ using Synchronization.Logs;
 
 namespace Synchronization.Settings
 {
-    public static class Settings
+    public class SettingOptions
     {
         private static ConsoleLog _log = new ConsoleLog("Settings");
         /// <summary>

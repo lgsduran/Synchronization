@@ -33,7 +33,7 @@ namespace Synchronization.Extensions
             source.FullName.DirectoriesSearcher()
                 .ForEach(src =>
                 {
-                    src.SubFileSeacher()
+                    src.SubFileSearcher()
                         .ForEach(sourceFile =>
                         { 
                             var tempPath = sourceFile.Substring(target.FullName.Length - 1);
@@ -78,7 +78,7 @@ namespace Synchronization.Extensions
             source.FullName.DirectoriesSearcher()
                .ForEach(src =>
                {
-                   src.SubFileSeacher()
+                   src.SubFileSearcher()
                        .ForEach(sourceFile =>
                        {
                            var tempPath = sourceFile.Substring(target.FullName.Length - 1);
@@ -134,17 +134,17 @@ namespace Synchronization.Extensions
             var _log = new ConsoleLog("Deleted");
 
             target.FullName.DirectoriesSearcher()
-                .ForEach(x =>
+                .ForEach(src =>
                 {
-                    var tempPath = x.Substring(target.FullName.Length);
+                    var tempPath = src.Substring(target.FullName.Length);
                     var newPath = Path.Combine(source.FullName, tempPath);
                     if (!Directory.Exists(newPath))
                     {
-                        if (Directory.Exists(x))
+                        if (Directory.Exists(src))
                         {
-                            Directory.Delete(x, true);
-                            _logFile.WriteFile("Delete", x, "", "");
-                            _log.Info(string.Format("Deleted: {0}", x));
+                            Directory.Delete(src, true);
+                            _logFile.WriteFile("Delete", src, "", "");
+                            _log.Info(string.Format("Deleted: {0}", src));
                         }
                     }
                 });
@@ -152,7 +152,7 @@ namespace Synchronization.Extensions
             target.FullName.DirectoriesSearcher()
                 .ForEach(src =>
                 {
-                    src.SubFileSeacher()
+                    src.SubFileSearcher()
                         .ForEach(targetFile =>
                         {                   
                             var tempPath = targetFile.Substring(target.FullName.Length);

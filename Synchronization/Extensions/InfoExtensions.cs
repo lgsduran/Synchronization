@@ -20,7 +20,7 @@
                 .ToList();
         }
 
-        public static List<string> SubFileSeacher(this string path)
+        public static List<string> SubFileSearcher(this string path)
         {
             return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
                 .ToList();
