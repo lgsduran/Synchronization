@@ -1,4 +1,4 @@
-﻿namespace Synchronization.Tests.Utils
+﻿namespace SynchronizationTests.Utils
 {
     public class FileUtils
 	{

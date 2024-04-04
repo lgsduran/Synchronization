@@ -1,7 +1,9 @@
 ﻿using Synchronization.Operations;
 using Synchronization.Settings;
-using Synchronization.Tests.Utils;
 using Synchronization.Utils;
+using SynchronizationTests.Utils;
+
+namespace SynchronizationTests;
 
 public class OperationSingleFileTest
 {
