@@ -19,6 +19,7 @@ services:
      volumes:
       - src:/var/tmp/srcFolder
       - dest:/var/tmp/destFolder
+      - logs:/var/tmp/logs
 
 volumes:
   src:
