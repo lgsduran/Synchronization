@@ -24,7 +24,7 @@ jobs:
       run: |
         sudo chmod +x ./SynchronizationTests/scripts/folders.sh
         sudo ./SynchronizationTests/scripts/folders.sh
-        cd /var
+        cd /var/tmp
         pwd
     - name: Test
       run: dotnet test SynchronizationTests/SynchronizationTests.csproj
