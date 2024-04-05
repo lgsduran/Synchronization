@@ -1,8 +1,6 @@
 ﻿#!/bin/bash
 
-directories=("var/tmp/srcFolder" "var/tmp/destFolder")
-
-for directory in "${directories[@]}";
+for directory in var/tmp/srcFolder var/tmp/destFolder;
 do
   mkdir -m 777 $directory
 done
