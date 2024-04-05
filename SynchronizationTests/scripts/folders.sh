@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+﻿#!/bin/bash
 
 for directory in var/tmp/srcFolder var/tmp/destFolder;
 do
