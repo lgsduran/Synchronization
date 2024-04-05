@@ -2,5 +2,5 @@
 
 for directory in var/tmp/srcFolder var/tmp/destFolder;
 do
-  mkdir -m 777 -p $directory
+  mkdir -p $directory
 done
