@@ -1,8 +1,7 @@
 #!/usr/bin/bash
 
-directories=(var/tmp/srcFolder var/tmp/destFolder)
+src_dir=var/tmp/srcFolder
+dest_dir=var/tmp/destFolder
 
-for directory in "${directories[@]}";
-do
-  sudo mkdir -p $directory
-done
+mkdir -p "${src_dir}"
+mkdir -p "${dest_dir}"
