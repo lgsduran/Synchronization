@@ -22,10 +22,9 @@ jobs:
         dotnet-version: 8.0.x
     - name: Set up test folders
       run: |
-        sudo su
         sudo chmod +x ./SynchronizationTests/scripts/folders.sh
         sudo ./SynchronizationTests/scripts/folders.sh
-        sudo cd /var/tmp/srcFolder
-        sudo pwd
+        cd /var/tmp/srcFolder
+        pwd
     - name: Test
       run: dotnet test SynchronizationTests/SynchronizationTests.csproj
