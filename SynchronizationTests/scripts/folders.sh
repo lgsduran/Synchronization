@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-src_dir=var/tmp/srcFolder
-dest_dir=var/tmp/destFolder
+src_dir=/var/tmp/srcFolder
+dest_dir=/var/tmp/destFolder
 
-mkdir -p "${src_dir}"
-mkdir -p "${dest_dir}"
+sudo mkdir -p "${src_dir}"
+sudo mkdir -p "${dest_dir}"
