@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+﻿#!/bin/bash
 
 directories=("var/tmp/srcFolder" "var/tmp/destFolder")
 
