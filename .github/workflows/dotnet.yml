@@ -37,7 +37,7 @@ jobs:
         pwd
     - name: Build image from docker-compose and push
       run: |
-        cd /home/runner/work/Synchronization/Synchronization/Synchronization
+        cd /home/runner/work/Synchronization/Synchronization/
         ls -lha
         pwd
         docker build -f Dockerfile -t lgsduran/synchronization:latest .
