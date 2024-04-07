@@ -42,5 +42,4 @@ jobs:
         pwd
         docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:latest .
         docker image ls
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
         docker push lgsduran/synchronization:latest
