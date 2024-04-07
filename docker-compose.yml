@@ -10,17 +10,7 @@ services:
       - src:/var/tmp/srcFolder
       - dest:/var/tmp/destFolder
       - logs:/var/tmp/logs
-
-  synchronizationtests:
-    image: ${DOCKER_REGISTRY-}synchronizationtests
-    build:
-      context: .
-      dockerfile: SynchronizationTests/Dockerfile
-    volumes:
-      - src:/var/tmp/srcFolder
-      - dest:/var/tmp/destFolder
-      - logs:/var/tmp/logs
-
+      
 volumes:
   src:
   dest:
