@@ -16,7 +16,7 @@ services:
     build:
       context: .
       dockerfile: SynchronizationTests/Dockerfile
-     volumes:
+    volumes:
       - src:/var/tmp/srcFolder
       - dest:/var/tmp/destFolder
       - logs:/var/tmp/logs
