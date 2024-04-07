@@ -35,4 +35,5 @@ jobs:
       run: | 
         docker-compose up --build -d
         docker image ls
-        docker push lgsduran/synchronization:latest
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} docker.io
+        docker push synchronization:latest
