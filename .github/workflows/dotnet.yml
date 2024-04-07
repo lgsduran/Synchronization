@@ -39,7 +39,7 @@ jobs:
         ls -lha
     - name: Build image from docker-compose and push
       run: | 
-        docker build -f . -t lgsduran/synchronization:latest .
+        docker build -f Synchronization/Synchronization -t lgsduran/synchronization:latest .
         docker image ls
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
         docker push lgsduran/synchronization:latest
