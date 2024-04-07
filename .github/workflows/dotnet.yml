@@ -32,6 +32,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build the Docker image
-      run: docker-compose up -d
+      run: docker-compose up --build -d
     - name: Docker Push
       run: docker push ${{ secrets.DOCKER_USERNAME }}/synchronization:latest
