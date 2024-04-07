@@ -40,6 +40,6 @@ jobs:
         cd /home/runner/work/Synchronization/Synchronization/
         ls -lha
         pwd
-        docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:latest .
+        docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:$(date +%s) .
         docker image ls
-        docker push lgsduran/synchronization:latest
+        docker push lgsduran/synchronization:$(date +%s)
