@@ -35,6 +35,7 @@ jobs:
       run: |
         ls -lha
         pwd
+        ls -lha /home/runner/work/Synchronization/Synchronization
     - name: Build image from docker-compose and push
       run: | 
         docker build -f . -t lgsduran/synchronization:latest .
