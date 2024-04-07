@@ -32,9 +32,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: cd
-      run: | 
-        sudo cd Synchronization
-        sudo pwd
+      run: sudo pwd
     - name: Build image from docker-compose and push
       run: | 
         sudo cd Synchronization
