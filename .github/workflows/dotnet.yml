@@ -34,6 +34,6 @@ jobs:
     - name: Build image from docker-compose and push
       run: |
         cd /home/runner/work/Synchronization/Synchronization/
-        docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:latest .
+        docker build -f Synchronization/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/synchronization:latest .
         docker image ls
-        docker push lgsduran/synchronization:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/synchronization:latest
