@@ -31,15 +31,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: cd
-      run: |
-        ls -lha
-        pwd
     - name: Build image from docker-compose and push
       run: |
-        cd /home/runner/work/Synchronization/Synchronization/
-        ls -lha
-        pwd
-        docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:$(date +%s) .
+        docker build -f Synchronization/Synchronization/Dockerfile -t lgsduran/synchronization:latest .
         docker image ls
-        docker push lgsduran/synchronization:$(date +%s)
+        docker push lgsduran/synchronization:latest
