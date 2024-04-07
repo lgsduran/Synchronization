@@ -35,5 +35,5 @@ jobs:
       run: | 
         docker build -t lgsduran/synchronization:latest
         docker image ls
-        //docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
         docker push lgsduran/synchronization:latest
