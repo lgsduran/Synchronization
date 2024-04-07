@@ -33,7 +33,8 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build image from docker-compose and push
       run: | 
-        docker build -f /Synchronization -t lgsduran/synchronization:latest .
+        cd Synchronization
+        docker build -f Synchronization/Dockerfile -t lgsduran/synchronization:latest .
         docker image ls
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
         docker push lgsduran/synchronization:latest
