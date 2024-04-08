@@ -36,4 +36,5 @@ jobs:
         docker-compose up -d
         cd /home/runner/work/Synchronization/Synchronization/
         docker image ls
+        docker tag synchronization ${{ secrets.DOCKER_USERNAME }}/synchronization:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/synchronization:latest
