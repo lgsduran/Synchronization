@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   synchronization:
-    image: ${DOCKER_REGISTRY-}synchronization
+    image: ${DOCKER_REGISTRY-}synchronization:latest
     build:
       context: .
       dockerfile: Synchronization/Dockerfile
