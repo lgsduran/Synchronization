@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build image from docker-compose and push
       run: |
-        docker-compose up --build -d
+        docker-compose up -d
         cd /home/runner/work/Synchronization/Synchronization/
         docker image ls
         docker push synchronization:latest
