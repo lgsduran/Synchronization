@@ -2,10 +2,9 @@ version: '3.4'
 
 services:
   synchronization:
-    image: ${DOCKER_REGISTRY-}synchronization
+    image: lgsduran/synchronization
     build:
       context: .
-      dockerfile: Synchronization/Dockerfile
     volumes:
       - src:/var/tmp/srcFolder
       - dest:/var/tmp/destFolder
