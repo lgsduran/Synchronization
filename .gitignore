@@ -404,3 +404,4 @@ ASALocalRun/
 .localhistory/
 
 .txt
+/logs/*.txt
