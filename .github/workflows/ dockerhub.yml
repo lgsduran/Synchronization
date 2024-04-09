@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - 
       uses: actions/checkout@v4
@@ -53,4 +51,4 @@ jobs:
         context: .
         push: true
         target: final
-        tags: ${{ secrets.DOCKER_USERNAME }}/synchronization:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
