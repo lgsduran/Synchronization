@@ -23,9 +23,9 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - 
-      name: Workaroud to mount the test folders
+      name: Workaround to mount the test folders
       run: |
-        sudo chmod +x /scripts/folders.sh
+        sudo chmod +x scripts/folders.sh
         sudo ./scripts/folders.sh    
     - 
       name: Test the Solution
