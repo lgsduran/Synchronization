@@ -25,8 +25,8 @@ jobs:
     - 
       name: Workaroud to mount the test folders
       run: |
-        sudo chmod +x ./SynchronizationTests/scripts/folders.sh
-        sudo ./SynchronizationTests/scripts/folders.sh    
+        sudo chmod +x /scripts/folders.sh
+        sudo ./scripts/folders.sh    
     - 
       name: Test the Solution
       run: dotnet test SynchronizationTests/SynchronizationTests.csproj
