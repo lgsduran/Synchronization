@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synchronization", "Synchronization.csproj", "{F4819139-E7CC-48CE-91BE-C5F24DF33ACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynchronizationTests", "..\SynchronizationTests\SynchronizationTests.csproj", "{5EE6228E-9960-4B16-AA6E-214E38F91AEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F4819139-E7CC-48CE-91BE-C5F24DF33ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4819139-E7CC-48CE-91BE-C5F24DF33ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4819139-E7CC-48CE-91BE-C5F24DF33ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE6228E-9960-4B16-AA6E-214E38F91AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE6228E-9960-4B16-AA6E-214E38F91AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE6228E-9960-4B16-AA6E-214E38F91AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE6228E-9960-4B16-AA6E-214E38F91AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
