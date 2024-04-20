@@ -25,6 +25,25 @@
             return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
                 .ToList();
         }
+
+        public static string FirstCharToUpper(this String input, char separator = ' ')
+        {
+            var formatedString = new List<string>();
+            foreach (var word in input.Split(separator))
+            {
+                switch (word)
+                {
+                    case null: throw new ArgumentNullException(nameof(word));
+
+                    case "": throw new ArgumentException($"{nameof(word)} cannot be empty", nameof(word));
+
+                    default:
+                        formatedString.Add(word.First().ToString().ToUpper() + word.Substring(1));
+                        break;
+                }
+            }
+            return string.Join(" ", formatedString);
+        }
     }
 }
 
